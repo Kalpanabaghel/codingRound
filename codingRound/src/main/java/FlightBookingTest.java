@@ -14,16 +14,18 @@ public class FlightBookingTest extends BaseClass {
 
 	@Test
 	public void testThatResultsAppearForAOneWayJourney() {
+		
+		try{
 
 		setDriverPath();
 		driver = new ChromeDriver();
 		driver.get(Url);
 		waitFor(2000);
-		
+
 		getWebElement(driver,"ID","OneWay").click();
 		getWebElement(driver,"ID","FromTag").clear();
 		getWebElement(driver,"ID","FromTag").sendKeys("Bangalore");
-		
+
 		//wait for the auto complete options to appear for the origin
 		waitFor(2000);
 		List<WebElement> originOptions = getWebElements(getWebElement(driver,"ID","ui-id-1"),"TAG","li");
@@ -38,18 +40,21 @@ public class FlightBookingTest extends BaseClass {
 		//select the first item from the destination auto complete list
 		List<WebElement> destinationOptions = getWebElements(getWebElement(driver,"ID","ui-id-2"),"TAG","li");
 		destinationOptions.get(0).click();
-		
+
 		getWebElement(driver,"XPATH","//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[3]/td[7]/a").click();
 
 		//all fields filled in. Now click on search
 		getWebElement(driver,"ID","SearchBtn").click();
-		
+
 		waitFor(5000);
 		//verify that result appears for the provided journey search
 		Assert.assertTrue(isElementPresent(driver,"CLASS","searchSummary"));
+	}
+		finally{	
+			//close the browser
+			driver.quit(); 
+		}
 
-		//close the browser
-		driver.quit();
 
 	}
 
