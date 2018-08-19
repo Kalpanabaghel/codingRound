@@ -1,0 +1,7 @@
+#Code Review Comments
+
+1) Redundancy of methods (Solution - Made a base class inclusing all frequently used methods such as findElement etc. )
+2) Incorrect Locator at one place (Solution - Corrected the locator)
+3) No Frame switching (Solution - Switched to frame before locating the element in the frame)
+4) Incorrect POM implementation (Solution - Corrected the implementation)
+ 
